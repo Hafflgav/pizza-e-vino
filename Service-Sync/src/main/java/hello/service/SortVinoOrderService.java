@@ -19,14 +19,14 @@ public class SortVinoOrderService {
     public void sortVinoOrder() throws InterruptedException {
 
         int loops = 3;
-            System.out.println("We're Working on getting you Cake! -- " );
+            System.out.println("We're Working on getting you Vino! -- " );
             while(loops >= 0) {
                 System.out.print("..");
                 Thread.sleep(waitTimeMillis);
                 loops--;
             }
             System.out.println();
-            System.out.println("Cake is up -- " );
+            System.out.println("Vino is up -- " );
 
         System.out.println("All good - order is complete");
     }

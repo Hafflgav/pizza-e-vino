@@ -30,7 +30,7 @@ public class SortPizzaOrderService {
                 OrderMessageRequest request = new OrderMessageRequest();
                 request.orderMessage = message;
                 restTemplate.put(uri, request);
-                System.out.println("I've sent an order for coffee");
+                System.out.println("I've sent an order for Pizza");
             }
         }
     }

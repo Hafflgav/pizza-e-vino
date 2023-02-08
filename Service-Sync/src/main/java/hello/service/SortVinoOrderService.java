@@ -1,6 +1,5 @@
 package hello.service;
 
-import io.camunda.zeebe.spring.client.annotation.JobWorker;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -15,8 +14,7 @@ public class SortVinoOrderService {
 
     long waitTimeMillis = 1000;
 
-    @JobWorker(type = "sortVinoOrder")
-    public void sortVinoOrder() throws InterruptedException {
+    public void execute() throws InterruptedException {
 
         int loops = 3;
             System.out.println("We're Working on getting you Vino! -- " );

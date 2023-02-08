@@ -1,6 +1,5 @@
 package hello.service;
 
-import io.camunda.zeebe.spring.client.annotation.JobWorker;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -15,8 +14,7 @@ public class SortPizzaOrderService {
         this.restTemplate = restTemplateBuilder.build();
     }
 
-    @JobWorker(type="sortPizzaOrder")
-    public void sortPizzaOrder(){
+    public void execute(){
         String message = "Pizza Needed";
 
         URI uri = URI.create("http://localhost:8081/WorkIt/");

@@ -3,21 +3,14 @@ package hello;
 import hello.service.OrderMessageRequest;
 import hello.service.SortPizzaOrderService;
 import hello.service.SortVinoOrderService;
-import io.camunda.zeebe.spring.client.lifecycle.ZeebeClientLifecycle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @RestController
 public class ServiceController {
-
-    @Autowired
-    private ZeebeClientLifecycle client;
 
     @Autowired
     SortVinoOrderService sortVinoOrder;
@@ -27,19 +20,20 @@ public class ServiceController {
 
     @RequestMapping(value = "/orderUp", method = RequestMethod.POST)
     public String index(@RequestBody OrderMessageRequest orderMessageRequest) throws Exception {
+
         System.out.println("Got this message for Mike: " + orderMessageRequest.orderMessage);
-        String orderMessage = orderMessageRequest.orderMessage;
-        Map<String, Object> vars = new HashMap<String, Object>();
+        // Map<String, Object> vars = new HashMap<String, Object>();
+        String orderMessage = "";
 
-        vars.put("message", orderMessageRequest.orderMessage.toLowerCase());
-        vars.put("businessKey", orderMessageRequest.orderName);
+        if(orderMessageRequest.orderMessage.toLowerCase().contains("vino")){
+            orderMessage = orderMessage + " Vino ";
+            sortVinoOrder.execute();
+        }
+        if(orderMessageRequest.orderMessage.toLowerCase().contains("pizza")){
+            orderMessage = orderMessage + " Pizza ";
+            sortPizzaOrder.execute();
+        }
 
-        client.newCreateInstanceCommand()
-                .bpmnProcessId("ProcessOrder")
-                .latestVersion()
-                .variables(vars)
-                .send();
-
-        return "We are working on the order for " + orderMessage;
+        return "Order of " + orderMessage + " Is Ready";
     }
 }

@@ -1,4 +1,4 @@
-package hello.orderSorter;
+package hello.service;
 
 public class OrderMessageRequest {
     public String orderMessage;

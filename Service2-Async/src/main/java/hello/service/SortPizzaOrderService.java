@@ -1,6 +1,7 @@
 package hello.service;
 
 import io.camunda.zeebe.spring.client.annotation.JobWorker;
+import io.camunda.zeebe.spring.client.annotation.Variable;
 import io.camunda.zeebe.spring.client.exception.ZeebeBpmnError;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Component;
@@ -18,7 +19,7 @@ public class SortPizzaOrderService {
     }
 
     @JobWorker(type = "sortPizzaOrder", fetchAllVariables = true)
-    public void sortPizzaOrder(String message) throws Exception {
+    public void sortPizzaOrder(@Variable String message) throws Exception {
         Random random = new Random();
 
         if(message.contains("hawaii") && random.nextBoolean()){

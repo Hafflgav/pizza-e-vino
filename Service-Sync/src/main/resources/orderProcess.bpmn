@@ -6,10 +6,10 @@
     </bpmn:startEvent>
     <bpmn:sequenceFlow id="SequenceFlow_1vnwn5v" sourceRef="StartEvent_1" targetRef="ExclusiveGateway_1ke18rl" />
     <bpmn:sequenceFlow id="SequenceFlow_11iviyz" name="Vino Ordered" sourceRef="ExclusiveGateway_1ke18rl" targetRef="Task_01xtn8k">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=message.contains('vino')</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=contains(message, "vino")</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_1s1ulcw" name="Pizza Ordered" sourceRef="ExclusiveGateway_1ke18rl" targetRef="Task_0dufn4e">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=message.contains('pizza')</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=contains(message, "pizza")</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:inclusiveGateway id="ExclusiveGateway_1ke18rl" default="SequenceFlow_0s4a5m7">
       <bpmn:incoming>SequenceFlow_1vnwn5v</bpmn:incoming>
@@ -56,7 +56,7 @@
         <camunda:inputOutput>
           <camunda:inputParameter name="orderMessage">Cake is Ready</camunda:inputParameter>
         </camunda:inputOutput>
-        <zeebe:taskDefinition type="tellCashierAboutOrder" />
+        <zeebe:taskDefinition type="tellCheckout" />
         <zeebe:taskHeaders>
           <zeebe:header key="delegateExpression" value="#{tellCashierAboutOrder}" />
         </zeebe:taskHeaders>
@@ -70,7 +70,7 @@
         <camunda:inputOutput>
           <camunda:inputParameter name="orderMessage">Coffee Is Ready</camunda:inputParameter>
         </camunda:inputOutput>
-        <zeebe:taskDefinition type="tellCashierAboutOrder" />
+        <zeebe:taskDefinition type="tellCheckout" />
         <zeebe:taskHeaders>
           <zeebe:header key="delegateExpression" value="#{tellCashierAboutOrder}" />
         </zeebe:taskHeaders>
@@ -95,7 +95,7 @@
           <camunda:inputOutput>
             <camunda:inputParameter name="orderMessage">The order is taking longer than we thought</camunda:inputParameter>
           </camunda:inputOutput>
-          <zeebe:taskDefinition type="tellCashierAboutOrder" />
+          <zeebe:taskDefinition type="tellCheckout" />
           <zeebe:taskHeaders>
             <zeebe:header key="delegateExpression" value="#{tellCashierAboutOrder}" />
           </zeebe:taskHeaders>

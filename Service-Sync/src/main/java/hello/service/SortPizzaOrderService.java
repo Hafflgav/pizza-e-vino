@@ -17,7 +17,7 @@ public class SortPizzaOrderService {
 
     @JobWorker(type="sortPizzaOrder")
     public void sortPizzaOrder(){
-        String message = "Coffee Needed";
+        String message = "Pizza Needed";
 
         URI uri = URI.create("http://localhost:8081/WorkIt/");
         OrderMessageRequest request = new OrderMessageRequest();

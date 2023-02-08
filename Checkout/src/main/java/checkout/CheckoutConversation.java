@@ -6,7 +6,7 @@ import javax.annotation.PostConstruct;
 import java.util.Scanner;
 
 @Component
-public class CehckoutConversation {
+public class CheckoutConversation {
 
   @PostConstruct
   public void startChat() throws Exception{
@@ -16,7 +16,7 @@ public class CehckoutConversation {
           Scanner scanner = new Scanner(System.in);
           //new ServiceController().index(scanner.next());
           while(true) {
-              System.out.println("Welcome to Kaffee und Kuchen, What would you like?");
+              System.out.println("Welcome to Pizza and Vino, What would you like?");
               String order = scanner.nextLine();
               System.out.println("And what is your name?");
               String name = scanner.nextLine();

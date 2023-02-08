@@ -1,2 +1,9 @@
 server:
   port : 8080
+zeebe:
+  client:
+    cloud:
+      region: dsm-1
+      clusterId:
+      clientId:
+      clientSecret:

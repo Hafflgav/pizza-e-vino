@@ -30,7 +30,6 @@ public class MessageForCheckout {
             notificationApp.notify("<p style=\"border:2px solid Green;\"> -- " + orderMessageRequest.orderMessage + " for" +
                     " " + orderMessageRequest.orderName + " --  </p>");
         }
-
         return "success";
     }
 }

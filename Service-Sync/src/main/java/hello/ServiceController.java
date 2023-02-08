@@ -2,6 +2,7 @@ package hello;
 
 import hello.service.OrderMessageRequest;
 import hello.service.SortPizzaOrderService;
+import hello.service.SortVinoOrderService;
 import io.camunda.zeebe.spring.client.lifecycle.ZeebeClientLifecycle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,10 +20,10 @@ public class ServiceController {
     private ZeebeClientLifecycle client;
 
     @Autowired
-    SortPizzaOrderService sortCakeOrder;
+    SortVinoOrderService sortVinoOrder;
 
     @Autowired
-    SortPizzaOrderService sortCoffeeOrder;
+    SortPizzaOrderService sortPizzaOrder;
 
     @RequestMapping(value = "/orderUp", method = RequestMethod.POST)
     public String index(@RequestBody OrderMessageRequest orderMessageRequest) throws Exception {
@@ -34,7 +35,7 @@ public class ServiceController {
         vars.put("businessKey", orderMessageRequest.orderName);
 
         client.newCreateInstanceCommand()
-                .bpmnProcessId("orderProcess")
+                .bpmnProcessId("ProcessOrder")
                 .latestVersion()
                 .variables(vars)
                 .send();

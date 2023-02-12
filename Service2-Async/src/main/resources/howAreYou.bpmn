@@ -29,10 +29,10 @@
       <bpmn:outgoing>SequenceFlow_0kmu169</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="SequenceFlow_1qfb9qb" name="Vino Ordered" sourceRef="ExclusiveGateway_1s83lpq" targetRef="Task_00j8fvg">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=contains(message, "vino")</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=contains(orderMessage, "vino")</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_0mpy8jg" name="Pizza ordered" sourceRef="ExclusiveGateway_1s83lpq" targetRef="Task_01zc39e">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=contains(message,"pizza")</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=contains(orderMessage,"pizza")</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_0kmu169" sourceRef="Task_01zc39e" targetRef="Task_0r6t9lo" />
     <bpmn:serviceTask id="Task_0r6t9lo" name="Tell Cashier the Pizza is ready" camunda:asyncBefore="true" camunda:exclusive="false" camunda:type="external" camunda:topic="">
@@ -44,6 +44,9 @@
         <zeebe:taskHeaders>
           <zeebe:header key="delegateExpression" value="#{tellCashierAboutOrder}" />
         </zeebe:taskHeaders>
+        <zeebe:ioMapping>
+          <zeebe:input source="=&#34;Pizza is ready&#34;" target="message" />
+        </zeebe:ioMapping>
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0kmu169</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_03xrlbw</bpmn:outgoing>
@@ -63,6 +66,9 @@
         <zeebe:taskHeaders>
           <zeebe:header key="delegateExpression" value="#{tellCashierAboutOrder}" />
         </zeebe:taskHeaders>
+        <zeebe:ioMapping>
+          <zeebe:input source="=&#34;Vino is ready&#34;" target="message" />
+        </zeebe:ioMapping>
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_1h66828</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0nhi2ol</bpmn:outgoing>
@@ -131,6 +137,9 @@
           <zeebe:taskHeaders>
             <zeebe:header key="delegateExpression" value="#{tellCashierAboutOrder}" />
           </zeebe:taskHeaders>
+          <zeebe:ioMapping>
+            <zeebe:input source="=&#34;Calm down, your order will be ready soon&#34;" target="message" />
+          </zeebe:ioMapping>
         </bpmn:extensionElements>
         <bpmn:incoming>SequenceFlow_1pfyin1</bpmn:incoming>
         <bpmn:outgoing>SequenceFlow_0rpjv91</bpmn:outgoing>
@@ -213,7 +222,7 @@
       <bpmndi:BPMNShape id="BoundaryEvent_0t7xhxl_di" bpmnElement="IntermediateThrowEvent_03z3pwv">
         <dc:Bounds x="622" y="422" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="600" y="465" width="81" height="14" />
+          <dc:Bounds x="649" y="465" width="81" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0x4prne_di" bpmnElement="SequenceFlow_0x4prne">

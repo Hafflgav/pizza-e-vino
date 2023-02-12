@@ -22,7 +22,7 @@ public class ServiceController {
         System.out.println("Got this message for Mike: " + orderMessageRequest.orderMessage);
         Map<String, Object> vars = new HashMap<String, Object>();
 
-        vars.put("message", orderMessageRequest.orderMessage.toLowerCase());
+        vars.put("orderMessage", orderMessageRequest.orderMessage.toLowerCase());
         vars.put("businessKey", orderMessageRequest.orderName);
 
 

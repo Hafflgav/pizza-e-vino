@@ -17,10 +17,10 @@ public class TellCeckoutSomething {
     }
 
     @JobWorker(type = "tellCheckout")
-    public void tellCheckoutAboutOrder(@Variable String message, @Variable String businessKey) throws Exception {
+    public void tellCheckoutAboutOrder(@Variable String message, @Variable String orderMessage, @Variable String businessKey) throws Exception {
         URI uri = URI.create("http://localhost:8082/messageForCheckout/");
         OrderMessageRequest request = new OrderMessageRequest();
-        request.orderMessage = message;
+        request.orderMessage = message + " from order " +orderMessage;
         request.orderName = businessKey;
         restTemplate.put(uri, request);
         System.out.println(businessKey + " Ready!");

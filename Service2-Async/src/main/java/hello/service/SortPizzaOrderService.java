@@ -19,17 +19,17 @@ public class SortPizzaOrderService {
     }
 
     @JobWorker(type = "sortPizzaOrder", fetchAllVariables = true)
-    public void sortPizzaOrder(@Variable String message) throws Exception {
+    public void sortPizzaOrder(@Variable String orderMessage) throws Exception {
         Random random = new Random();
 
-        if(message.contains("hawaii") && random.nextBoolean()){
+        if(orderMessage.contains("hawaii") && random.nextBoolean()){
             Thread.sleep(10000);
             throw new ZeebeBpmnError("DOESNT_WORK", "We do not have any pineapples");
         } else {
-            if (message.toLowerCase().contains("pizza")) {
+            if (orderMessage.toLowerCase().contains("pizza")) {
                 URI uri = URI.create("http://localhost:8081/WorkIt/");
                 OrderMessageRequest request = new OrderMessageRequest();
-                request.orderMessage = message;
+                request.orderMessage = orderMessage;
                 restTemplate.put(uri, request);
                 System.out.println("I've sent an order for Pizza");
             }

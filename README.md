@@ -40,3 +40,13 @@ service. Though we do not serve Pizza Hawaii and throw a BPMN Error if someone o
 
 Once the order is sorted we are going to tell the cashier / waiter that it is ready. If the order fulfillment takes longer than 1 minute we are
 going to tell checkout to calm down the customer.
+
+## What's next? 
+Of course there is further potential in this example. An immediate next step would be to add Kafka to the equation. Instead of communicating through REST 
+our services could throw "Domain Events" and interpret them. A simple sketch of this architecture can be found in the picture below. 
+
+![Bringing Kafka into the equation](./img/kafka.png)
+
+Last but not least we can implement each of our services in such a way that they are technology neutral. Featuring in and out adapters and hexagonal 
+architecture so our domain is a free as even possible. This concept is what [Miranum](https://miranum.com) is all about. Once it is release as a maven 
+dependency it will be worth trying it out and refactoring our code accordingly. 
